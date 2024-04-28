@@ -1,0 +1,39 @@
+.form-container {
+    width: 400px ;
+    margin: 20px auto;
+    padding: 20px 25px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: aqua; /* Set background color to aqua */
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+  }
+  
+  input[type="text"],
+  input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  

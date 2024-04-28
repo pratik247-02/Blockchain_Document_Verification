@@ -2,9 +2,15 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import {ethers} from 'ethers';
 import {contractABI, contractAddress} from './Constant/Constant' 
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import Login from './Components/Login'
 import Connected from './Components/Connected';
-import ChildForm from './Components/ChildForm';
+import Homepage from './Components/Pages/Homepage';
+import CreateBirthCertificate from './Components/Pages/createBirthCertificate';
+import CreateCollegeCertificate from './Components/Pages/createCollegeCertificate';
+import Verifybirthcertificate from './Components/Pages/verifybirthcertificate';
+import { Navbar } from './Components/Navbar/navbar';
+import Footer from './Components/Footer/footer';
 
 function App() {
 
@@ -46,7 +52,7 @@ function App() {
     const contractInstance = new ethers.Contract(contractAddress, contractABI, signer);
     const grads = await contractInstance.getGraduateCount(address);
     setGradCount(parseInt(grads, 16));
-    console.log(childCount);
+    console.log(gradCount);
   }  
 
   async function getAllChildData(){
@@ -56,7 +62,6 @@ function App() {
     const address = signer.getAddress();
     const contractInstance = new ethers.Contract(contractAddress, contractABI, signer);
     const count = childCount;
-    // console.log("here" + count);
 
     for (let i = 0; i < count; i++) {
       const allChild = await contractInstance.childRecords(address, i);
@@ -65,14 +70,17 @@ function App() {
   }
 
   async function getAllGradData(){
+    console.log("Here");
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     await provider.send("eth_requestAccounts", []);
     const signer = provider.getSigner();
     const address = signer.getAddress();
     const contractInstance = new ethers.Contract(contractAddress, contractABI, signer);
     const count = gradCount;
+    console.log(count);
 
     for (let i = 0; i < count; i++) {
+      console.log(i);
       const grad = await contractInstance.graduateRecords(address, i);
       console.log(grad);
     }
@@ -181,11 +189,21 @@ function App() {
 
   return (
     <div className="App">
-      Hello World
-      {isConnected ? (<Connected address = {account}/>) : (<Login connectWallet = {connectToMetamask}/>)}
-      <ChildForm setChildData = {setChildData}/>
-      <button onClick={getChildCount}>Get Child Count</button>
-      <button onClick={getAllChildData}>Get all Childs</button>
+      <Router>
+        <Navbar />
+        {isConnected ? (<Connected address = {account}/>) : (<Login connectWallet = {connectToMetamask}/>)}
+        <Routes>
+          <Route path='/' element= {<Homepage />}/>
+          <Route path='/createbirthcertificate' element = {<CreateBirthCertificate />}/>
+          <Route path='/createCollegeCertificate' element = {<CreateCollegeCertificate/>}/>
+          <Route path='/verifybirthcertificate' element = {<Verifybirthcertificate/>}/>
+        </Routes>
+        <Footer />
+      </Router>
+      <button onClick={getChildCount}>GetChild Count</button>
+      <button onClick={getAllChildData}>GetChilds</button>
+      <button onClick={getGradCount}>GetGrad Count</button>
+      <button onClick={getAllGradData}>GetGrads</button>
     </div>
   );
 }

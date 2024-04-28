@@ -1,0 +1,26 @@
+.footer {
+    background-color: black;
+    color: white;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+  }
+  
+ 
+  .footer .row {
+    text-align: center;
+  }
+  
+  .footer hr {
+    border-color: white;
+  }
+  
+  
+  .footer a:hover {
+    text-decoration: underline;
+  }
+  
+  body {
+    margin-bottom: 50px; /* Adjust according to the height of your footer */
+  }
+  
