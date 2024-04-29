@@ -11,6 +11,8 @@ import CreateCollegeCertificate from './Components/Pages/createCollegeCertificat
 import Verifybirthcertificate from './Components/Pages/verifybirthcertificate';
 import { Navbar } from './Components/Navbar/navbar';
 import Footer from './Components/Footer/footer';
+import Displaybirthcertificate from './Components/Pages/displaybirthcertificate';
+import Displaycollegecertificate from './Components/Pages/displaycollegecertificate';
 
 function App() {
 
@@ -20,6 +22,7 @@ function App() {
   const [childCount, setChildCount] = useState(0);
   const [gradCount, setGradCount] = useState(0);
 
+ 
   useEffect(() => {
     getChildCount();
     if(window.ethereum){
@@ -41,7 +44,7 @@ function App() {
     const contractInstance = new ethers.Contract(contractAddress, contractABI, signer);
     const childs = await contractInstance.getChildCount(address);
     setChildCount(parseInt(childs, 16));
-    console.log(childCount);
+    // console.log(childCount);
   }
 
   async function getGradCount() {
@@ -68,6 +71,7 @@ function App() {
       console.log(allChild);
     }
   }
+
 
   async function getAllGradData(){
     console.log("Here");
@@ -197,13 +201,15 @@ function App() {
           <Route path='/createbirthcertificate' element = {<CreateBirthCertificate />}/>
           <Route path='/createCollegeCertificate' element = {<CreateCollegeCertificate/>}/>
           <Route path='/verifybirthcertificate' element = {<Verifybirthcertificate/>}/>
+          <Route path="/displaybirthcertificate" element={<Displaybirthcertificate />}/>
+          <Route path="/displaycollegecertificate" element={<Displaycollegecertificate />}/>
         </Routes>
         <Footer />
       </Router>
-      <button onClick={getChildCount}>GetChild Count</button>
+      {/* <button onClick={getChildCount}>GetChild Count</button>
       <button onClick={getAllChildData}>GetChilds</button>
       <button onClick={getGradCount}>GetGrad Count</button>
-      <button onClick={getAllGradData}>GetGrads</button>
+      <button onClick={getAllGradData}>GetGrads</button> */}
     </div>
   );
 }

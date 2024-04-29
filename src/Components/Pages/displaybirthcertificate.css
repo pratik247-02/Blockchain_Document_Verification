@@ -1,0 +1,28 @@
+ .certificate-card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .child-card {
+    width: calc(45% ); 
+    margin: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(30, 28, 28, 0.1);
+  }
+  
+  .child-details {
+    margin-top: 10px;
+  }
+  
+  .child-details p {
+    margin: 5px 0;
+  }
+  
+  .child-details strong {
+    font-weight: bold;
+  }
+   
